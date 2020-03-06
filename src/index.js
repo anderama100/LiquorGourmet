@@ -8,8 +8,10 @@ const flash = require('connect-flash');
 const passport = require('passport');
 
 
+
 // Initializations
 const app = express();
+require('dotenv').config();
 require('./config/passport');
 require('./database');
 

@@ -1,5 +1,6 @@
 body {
-    background: aqua;
+    background-image: url('https://i.imgur.com/k85lFP3.jpg');
+    background-size: cover;
 }
 
 .logo {

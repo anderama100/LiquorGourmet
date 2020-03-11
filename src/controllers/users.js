@@ -37,7 +37,9 @@ usersCtrl.signup = async(req, res) => {
             // Saving a New User
             const newUser = new User({ name, email, password });
             newUser.password = await newUser.encryptPassword(password);
+            console.log("attempting to log in");
             await newUser.save();
+            console.log("attempting to save");
             req.flash("success_msg", "You are registered.");
             res.redirect("/users/signin");
         }

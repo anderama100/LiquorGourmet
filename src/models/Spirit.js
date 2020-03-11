@@ -1,5 +1,12 @@
 const { Schema, model } = require("mongoose");
 
+const reviewSchema = new Schema({
+    content: String
+}, {
+    timestamps: true
+});
+
+
 const SpiritSchema = new Schema({
     brand: {
         type: String,
@@ -13,6 +20,8 @@ const SpiritSchema = new Schema({
         type: String,
         required: true
     },
+    reviews: [reviewSchema],
+
     user: {
         type: String,
         required: true

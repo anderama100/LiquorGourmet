@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-
+//const Review = require("../controllers/reviews.js");
 
 // Controller
 const {
@@ -28,6 +28,8 @@ router.get("/spirits", isAuthenticated, renderSpirits);
 router.get("/spirits/edit/:id", isAuthenticated, renderEditForm);
 
 router.put("/spirits/edit-spirit/:id", isAuthenticated, updateSpirit);
+
+//router.put("/")
 
 // Delete catalogs
 router.delete("/spirits/delete/:id", isAuthenticated, deleteSpirit);

@@ -3,12 +3,14 @@ const spiritsCtrl = {};
 // Models
 const Spirit = require("../models/Spirit");
 
+
+
 spiritsCtrl.renderSpiritForm = (req, res) => {
     res.render("spirits/new-spirit");
 };
 
 spiritsCtrl.createNewSpirit = async(req, res) => {
-    const { brand, maker, barcode } = req.body;
+    const { brand, maker, barcode, content } = req.body;
     const errors = [];
     if (!brand) {
         errors.push({ text: "What's the brand." });
@@ -25,12 +27,15 @@ spiritsCtrl.createNewSpirit = async(req, res) => {
             brand,
             maker,
             barcode
+
         });
     } else {
         const newSpirit = new Spirit({ brand, maker, barcode });
+        newSpirit.reviews.push(req.body)
         newSpirit.user = req.user.id;
         await newSpirit.save();
         req.flash("success_msg", "Catalog Added");
+        //        console.log(newSpirit)
         res.redirect("/spirits");
     }
 };
@@ -46,14 +51,24 @@ spiritsCtrl.renderEditForm = async(req, res) => {
         req.flash("error_msg", "Not Authorized");
         return res.redirect("/spirits");
     }
-    res.render("spirits/edit-spirit", { spirit });
+    const review = spirit.reviews[0];
+    console.log(review);
+    res.render("spirits/edit-spirit", { spirit, review });
 };
 
 spiritsCtrl.updateSpirit = async(req, res) => {
-    const { brand, maker, barcode } = req.body;
-    await Spirit.findByIdAndUpdate(req.params.id, { brand, maker, barcode });
-    req.flash("success_msg", "Catalog Updated");
-    res.redirect("/spirits");
+    //    const { brand, maker, barcode, content } = req.body;
+    //console.log(req.body.review);
+    await Spirit.findByIdAndUpdate(req.params.id, req.body, function(err, spirit) {
+        spirit.reviews.pop()
+        spirit.reviews.push(req.body)
+        spirit.save()
+            //console.log(spiritCtrl);
+        req.flash("success_msg", "Catalog Updated");
+        res.redirect("/spirits");
+
+    });
+
 };
 
 spiritsCtrl.deleteSpirit = async(req, res) => {

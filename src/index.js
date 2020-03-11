@@ -1,7 +1,6 @@
 const express = require('express');
 const exphbs = require('express-handlebars');
 const path = require('path');
-const multer = require('multer');
 const methodOverride = require('method-override');
 const session = require('express-session');
 const flash = require('connect-flash');
@@ -14,6 +13,7 @@ const app = express();
 require('dotenv').config();
 require('./config/passport');
 require('./database');
+require('./routes/reviews');
 
 
 // settings
@@ -55,6 +55,7 @@ app.use((req, res, next) => {
 app.use(require('./routes/index'));
 app.use(require('./routes/spirits'));
 app.use(require('./routes/users'));
+app.use(require('./routes/reviews'));
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));

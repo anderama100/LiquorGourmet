@@ -1,6 +1,5 @@
 const spiritsCtrl = {};
 
-// Models
 const Spirit = require("../models/Spirit");
 
 
@@ -35,7 +34,6 @@ spiritsCtrl.createNewSpirit = async(req, res) => {
         newSpirit.user = req.user.id;
         await newSpirit.save();
         req.flash("success_msg", "Catalog Added");
-        //        console.log(newSpirit)
         res.redirect("/spirits");
     }
 };
@@ -52,18 +50,14 @@ spiritsCtrl.renderEditForm = async(req, res) => {
         return res.redirect("/spirits");
     }
     const review = spirit.reviews[0];
-    console.log(review);
     res.render("spirits/edit-spirit", { spirit, review });
 };
 
 spiritsCtrl.updateSpirit = async(req, res) => {
-    //    const { brand, maker, barcode, content } = req.body;
-    //console.log(req.body.review);
     await Spirit.findByIdAndUpdate(req.params.id, req.body, function(err, spirit) {
         spirit.reviews.pop()
         spirit.reviews.push(req.body)
         spirit.save()
-            //console.log(spiritCtrl);
         req.flash("success_msg", "Catalog Updated");
         res.redirect("/spirits");
 

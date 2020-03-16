@@ -17,7 +17,7 @@ require('./routes/reviews');
 
 
 // settings
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || '0.0.0.0';
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({

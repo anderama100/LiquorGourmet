@@ -17,7 +17,7 @@ require('./routes/reviews');
 
 
 // settings
-app.set('port', process.env.PORT || 3000);
+const PORT = process.env.PORT || 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
@@ -60,9 +60,8 @@ app.use(require('./routes/reviews'));
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(app.get('port'), () => {
-    console.log('server on port ', app.get('port'))
-
-
+app.listen(PORT, () => {
+    console.log(`Our app is running on port ${ PORT }`);
 });
+
 module.exports = app;

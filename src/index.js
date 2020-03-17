@@ -17,7 +17,7 @@ require('./routes/reviews');
 
 
 // settings
-var PRT = normalizePort(process.env.PORT || '3000');
+var PRT = normalizePort(process.env.PORT || '0.0.0.0');
 app.set('port', PRT);
 
 

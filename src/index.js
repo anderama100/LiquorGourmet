@@ -6,7 +6,7 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 
-
+require('dotenv').config();
 
 // Initializations
 const app = express();
@@ -17,7 +17,7 @@ require('./routes/reviews');
 
 
 // settings
-const PORT = process.env.PORT || '0.0.0.0';
+var PRT = process.env.PORT || 3000;
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
@@ -60,8 +60,8 @@ app.use(require('./routes/reviews'));
 // static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen(PORT, () => {
-    console.log(`Our app is running on port ${ PORT }`);
+app.listen(PRT, () => {
+    console.log(`Our app is running on port ${ PRT }`);
 });
 
 module.exports = app;

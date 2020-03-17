@@ -17,7 +17,8 @@ require('./routes/reviews');
 
 
 // settings
-var PRT = process.env.PORT || 3000;
+var PRT = normalizePort(process.env.PORT || '3000');
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
@@ -50,6 +51,22 @@ app.use((req, res, next) => {
     res.locals.user = req.user || null;
     next();
 });
+
+function normalizePort(val) {
+    var port = parseInt(val, 10);
+
+    if (isNaN(port)) {
+        // named pipe
+        return val;
+    }
+
+    if (port >= 0) {
+        // port number
+        return port;
+    }
+
+    return false;
+}
 
 // routes
 app.use(require('./routes/index'));

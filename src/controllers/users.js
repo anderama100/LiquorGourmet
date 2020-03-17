@@ -20,6 +20,7 @@ usersCtrl.signup = async(req, res) => {
         errors.push({ text: "Passwords must be at least 4 characters." });
     }
     if (errors.length > 0) {
+        req.flash("trying render");
         res.render("users/signup", {
             errors,
             name,

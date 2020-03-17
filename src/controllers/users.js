@@ -20,7 +20,7 @@ usersCtrl.signup = async(req, res) => {
         errors.push({ text: "Passwords must be at least 4 characters." });
     }
     if (errors.length > 0) {
-        req.flash("trying render");
+        errors.push({ text: "trying render." });
         res.render("users/signup", {
             errors,
             name,
@@ -30,7 +30,7 @@ usersCtrl.signup = async(req, res) => {
         });
     } else {
         // Look for email coincidence
-        req.flash("looking for email coincidence");
+        errors.push({ text: "looking email coincidence" });
         const emailUser = await User.findOne({ email: email });
         if (emailUser) {
             req.flash("error_msg", "The Email is already in use.");

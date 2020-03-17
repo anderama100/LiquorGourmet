@@ -29,19 +29,21 @@ usersCtrl.signup = async(req, res) => {
         });
     } else {
         // Look for email coincidence
+        req.flash("looking for email coincidence");
         const emailUser = await User.findOne({ email: email });
         if (emailUser) {
             req.flash("error_msg", "The Email is already in use.");
             res.redirect("/users/signup");
         } else {
             // Saving a New User
+            req.flash("saving a new user");
             const newUser = new User({ name, email, password });
             newUser.password = await newUser.encryptPassword(password);
-            console.log("attempting to log in");
-            alert('attempting to log in');
+            //console.log("attempting to log in");
+            //alert('attempting to log in');
             await newUser.save();
-            console.log("attempting to save");
-            alert('attempting to save');
+            //console.log("attempting to save");
+            //alert('attempting to save');
             req.flash("success_msg", "You are registered.");
             res.redirect("/users/signin");
         }

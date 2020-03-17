@@ -6,7 +6,6 @@ const session = require('express-session');
 const flash = require('connect-flash');
 const passport = require('passport');
 
-require('dotenv').config();
 
 // Initializations
 const app = express();
@@ -17,7 +16,7 @@ require('./routes/reviews');
 
 
 // settings
-var PRT = normalizePort(process.env.PORT || '0.0.0.0');
+var PRT = normalizePort(process.env.PORT || '3000');
 app.set('port', PRT);
 
 

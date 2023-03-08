@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const path = require("path");
-//const Review = require("../controllers/reviews.js");
+const Review = require("../controllers/reviews.js");
 
 // Controller
 const {

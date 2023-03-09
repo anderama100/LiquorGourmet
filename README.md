@@ -40,6 +40,6 @@ Log in in the app and follow the instructions.
 
 ## Code and Deployment
 *(https://github.com/anderama100/LiquorGourmet)
-*(https://liquor-gourmet.herokuapp.com/)
+*(https://licorapp2.herokuapp.com/)
 
                             
